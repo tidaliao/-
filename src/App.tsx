@@ -69,7 +69,7 @@ export default function App() {
   }, [xbarR, metadata]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-sky-500/30 selection:text-sky-200">
+    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col font-sans selection:bg-sky-500/20 selection:text-sky-900">
       {/* 頂部導航欄 */}
       <Header
         currentPresetId={currentPreset.id}
@@ -115,16 +115,16 @@ export default function App() {
               onOpenExcelModal={() => setIsExcelModalOpen(true)}
             />
 
-            {/* 4. 深入分析分頁控制 (Zero-pill button group) */}
+            {/* 4. 深入分析分頁控制 */}
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-lg text-xs">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div className="flex items-center gap-1 p-1 bg-slate-200/80 border border-slate-300/80 rounded-lg text-xs">
                   <button
                     onClick={() => setActiveAnalysisView('charts')}
                     className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md font-medium transition-colors ${
                       activeAnalysisView === 'charts'
-                        ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-white text-sky-800 shadow-xs font-semibold'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <BarChart3 className="w-3.5 h-3.5" />
@@ -134,8 +134,8 @@ export default function App() {
                     onClick={() => setActiveAnalysisView('detail')}
                     className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md font-medium transition-colors ${
                       activeAnalysisView === 'detail'
-                        ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-white text-sky-800 shadow-xs font-semibold'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <TableProperties className="w-3.5 h-3.5" />
@@ -145,8 +145,8 @@ export default function App() {
                     onClick={() => setActiveAnalysisView('anova')}
                     className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md font-medium transition-colors ${
                       activeAnalysisView === 'anova'
-                        ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-white text-sky-800 shadow-xs font-semibold'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <Split className="w-3.5 h-3.5" />
@@ -156,8 +156,8 @@ export default function App() {
                     onClick={() => setActiveAnalysisView('diagnostics')}
                     className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md font-medium transition-colors ${
                       activeAnalysisView === 'diagnostics'
-                        ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-white text-amber-900 shadow-xs font-semibold'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <Lightbulb className="w-3.5 h-3.5" />
@@ -217,7 +217,7 @@ export default function App() {
       />
 
       {/* 頁尾 */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-4 text-center text-xs text-slate-500 print:hidden font-mono">
+      <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500 print:hidden font-mono">
         車削加工量測系統分析 (MSA) 自動化報告系統 · 遵循 AIAG MSA 第 4 版標準規範 · 支援 IATF 16949 / ISO 9001
       </footer>
     </div>

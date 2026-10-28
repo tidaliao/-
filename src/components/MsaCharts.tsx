@@ -10,41 +10,42 @@ interface MsaChartsProps {
 export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) => {
   const [activeTab, setActiveTab] = useState<'xbar' | 'range' | 'components' | 'parts' | 'interaction'>('xbar');
 
+  // 白底專用高對比色彩
   const operatorColors = [
-    '#38bdf8', // sky-400
-    '#34d399', // emerald-400
-    '#fbbf24', // amber-400
-    '#f472b6', // pink-400
-    '#a78bfa', // purple-400
+    '#0284c7', // sky-600
+    '#059669', // emerald-600
+    '#d97706', // amber-600
+    '#db2777', // pink-600
+    '#7c3aed', // purple-600
   ];
 
   const n = data.parts.length;
   const k = data.operators.length;
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+    <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-4">
       {/* Chart Switcher Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
-          <h3 className="text-base font-semibold text-slate-100 flex items-center gap-2">
+          <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
             <span>MSA 統計製程與管制圖表</span>
-            <span className="text-xs text-slate-400 font-normal">
+            <span className="text-xs text-slate-500 font-normal">
               AIAG 4th Edition 視覺化分析
             </span>
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             即時計算管制界限 (UCL/LCL)、變異成分與人員/工件交互作用分佈
           </p>
         </div>
 
-        {/* Tab Controls (Zero-pill button group) */}
-        <div className="flex items-center gap-1 p-1 bg-slate-950 border border-slate-800 rounded-lg text-xs overflow-x-auto">
+        {/* Tab Controls */}
+        <div className="flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg text-xs overflow-x-auto">
           <button
             onClick={() => setActiveTab('xbar')}
             className={`px-3 py-1.5 rounded-md font-medium transition-colors whitespace-nowrap ${
               activeTab === 'xbar'
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-sky-700 shadow-2xs font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             均值圖 (X̄-bar)
@@ -53,8 +54,8 @@ export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) =
             onClick={() => setActiveTab('range')}
             className={`px-3 py-1.5 rounded-md font-medium transition-colors whitespace-nowrap ${
               activeTab === 'range'
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-sky-700 shadow-2xs font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             極差圖 (R-Chart)
@@ -63,8 +64,8 @@ export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) =
             onClick={() => setActiveTab('components')}
             className={`px-3 py-1.5 rounded-md font-medium transition-colors whitespace-nowrap ${
               activeTab === 'components'
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-sky-700 shadow-2xs font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             變異成分 (%Var)
@@ -73,8 +74,8 @@ export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) =
             onClick={() => setActiveTab('parts')}
             className={`px-3 py-1.5 rounded-md font-medium transition-colors whitespace-nowrap ${
               activeTab === 'parts'
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-sky-700 shadow-2xs font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             工件散佈圖
@@ -83,8 +84,8 @@ export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) =
             onClick={() => setActiveTab('interaction')}
             className={`px-3 py-1.5 rounded-md font-medium transition-colors whitespace-nowrap ${
               activeTab === 'interaction'
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-sky-700 shadow-2xs font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             交互作用圖
@@ -130,30 +131,30 @@ export const MsaCharts: React.FC<MsaChartsProps> = ({ data, metadata, xbarR }) =
       </div>
 
       {/* Legend & Operator Key */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
         <div className="flex flex-wrap items-center gap-4">
-          <span className="font-medium text-slate-300">作業員圖例:</span>
+          <span className="font-semibold text-slate-700">作業員圖例:</span>
           {data.operators.map((op, idx) => (
             <div key={op} className="flex items-center gap-1.5">
               <span
-                className="w-3 h-3 rounded-sm inline-block"
+                className="w-3 h-3 rounded-xs inline-block"
                 style={{ backgroundColor: operatorColors[idx % operatorColors.length] }}
               />
-              <span className="text-slate-300 font-mono">{op}</span>
+              <span className="text-slate-800 font-mono font-medium">{op}</span>
             </div>
           ))}
         </div>
         <div className="flex items-center gap-3 font-mono text-[11px]">
-          <span className="text-slate-400">
-            零件數 (n): <strong className="text-slate-200">{n}</strong>
+          <span className="text-slate-500">
+            零件數 (n): <strong className="text-slate-800">{n}</strong>
           </span>
           <span>·</span>
-          <span className="text-slate-400">
-            人員數 (k): <strong className="text-slate-200">{k}</strong>
+          <span className="text-slate-500">
+            人員數 (k): <strong className="text-slate-800">{k}</strong>
           </span>
           <span>·</span>
-          <span className="text-slate-400">
-            試驗次數 (r): <strong className="text-slate-200">{data.trials}</strong>
+          <span className="text-slate-500">
+            試驗次數 (r): <strong className="text-slate-800">{data.trials}</strong>
           </span>
         </div>
       </div>
@@ -171,7 +172,6 @@ const XbarChart: React.FC<{
   const n = data.parts.length;
   const k = data.operators.length;
 
-  // 決定 Y 軸極值
   let allVals: number[] = [xbarR.uclXbar, xbarR.lclXbar, xbarR.overallMean];
   for (let i = 0; i < k; i++) {
     for (let j = 0; j < n; j++) {
@@ -200,24 +200,24 @@ const XbarChart: React.FC<{
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+      <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
         <div>
-          <span className="text-slate-200 font-medium">均值圖 (X̄ by Operator & Part)</span>
-          <span className="mx-2 text-slate-600">|</span>
-          <span className="text-slate-400">
+          <span className="text-slate-900 font-semibold">均值圖 (X̄ by Operator & Part)</span>
+          <span className="mx-2 text-slate-300">|</span>
+          <span className="text-slate-600">
             管制界限由設備重複性決定。
-            <strong className="text-emerald-400 ml-1">
+            <strong className="text-emerald-700 ml-1">
               目標：多數零件點 (&gt;50%) 應落在管制界限外
             </strong>
             ，代表量具能靈敏感知工件間尺寸差異。
           </span>
         </div>
-        <div className="font-mono text-emerald-400 font-medium">
+        <div className="font-mono text-emerald-700 font-semibold">
           超限比率: {xbarR.pctOutOfControlXbar.toFixed(1)}% ({xbarR.pctOutOfControlXbar >= 50 ? '合格達標' : '待加強'})
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-slate-950 rounded-lg p-2 border border-slate-800">
+      <div className="w-full overflow-x-auto bg-white rounded-lg p-2 border border-slate-200 shadow-2xs">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full min-w-[700px] h-auto font-sans"
@@ -228,16 +228,17 @@ const XbarChart: React.FC<{
             y1={scaleY(xbarR.uclXbar)}
             x2={width - padRight}
             y2={scaleY(xbarR.uclXbar)}
-            stroke="#f43f5e"
+            stroke="#e11d48"
             strokeDasharray="4 4"
             strokeWidth="1.5"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(xbarR.uclXbar) + 4}
-            fill="#f43f5e"
+            fill="#e11d48"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             UCL: {xbarR.uclXbar.toFixed(4)}
           </text>
@@ -247,15 +248,16 @@ const XbarChart: React.FC<{
             y1={scaleY(xbarR.overallMean)}
             x2={width - padRight}
             y2={scaleY(xbarR.overallMean)}
-            stroke="#38bdf8"
+            stroke="#0284c7"
             strokeWidth="1.5"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(xbarR.overallMean) + 4}
-            fill="#38bdf8"
+            fill="#0284c7"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             X̿: {xbarR.overallMean.toFixed(4)}
           </text>
@@ -265,16 +267,17 @@ const XbarChart: React.FC<{
             y1={scaleY(xbarR.lclXbar)}
             x2={width - padRight}
             y2={scaleY(xbarR.lclXbar)}
-            stroke="#f43f5e"
+            stroke="#e11d48"
             strokeDasharray="4 4"
             strokeWidth="1.5"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(xbarR.lclXbar) + 4}
-            fill="#f43f5e"
+            fill="#e11d48"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             LCL: {xbarR.lclXbar.toFixed(4)}
           </text>
@@ -285,19 +288,19 @@ const XbarChart: React.FC<{
             y1={padTop}
             x2={padLeft}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           {[0, 0.25, 0.5, 0.75, 1].map((pct) => {
             const v = yMin + pct * (yMax - yMin);
             const y = scaleY(v);
             return (
               <g key={pct}>
-                <line x1={padLeft - 4} y1={y} x2={padLeft} y2={y} stroke="#475569" />
+                <line x1={padLeft - 4} y1={y} x2={padLeft} y2={y} stroke="#94a3b8" />
                 <text
                   x={padLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -313,7 +316,7 @@ const XbarChart: React.FC<{
             y1={height - padBottom}
             x2={width - padRight}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           {data.parts.map((p, idx) => {
             const x = scaleX(idx);
@@ -324,13 +327,13 @@ const XbarChart: React.FC<{
                   y1={height - padBottom}
                   x2={x}
                   y2={height - padBottom + 4}
-                  stroke="#475569"
+                  stroke="#94a3b8"
                 />
                 <text
                   x={x}
                   y={height - padBottom + 18}
                   textAnchor="middle"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -373,8 +376,8 @@ const XbarChart: React.FC<{
                       cx={x}
                       cy={y}
                       r={isOutOfLimits ? 4.5 : 3}
-                      fill={isOutOfLimits ? '#10b981' : color}
-                      stroke="#0f172a"
+                      fill={isOutOfLimits ? '#059669' : color}
+                      stroke="#ffffff"
                       strokeWidth="1.5"
                     />
                   );
@@ -422,13 +425,13 @@ const RangeChart: React.FC<{
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+      <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
         <div>
-          <span className="text-slate-200 font-medium">極差圖 (R-Chart by Operator)</span>
-          <span className="mx-2 text-slate-600">|</span>
+          <span className="text-slate-900 font-semibold">極差圖 (R-Chart by Operator)</span>
+          <span className="mx-2 text-slate-300">|</span>
           <span>
             檢視各作業員多次量測的波動重複性。
-            <strong className="text-amber-400 ml-1">
+            <strong className="text-amber-700 ml-1">
               所有點均應落在 UCL_R 之下
             </strong>
             。
@@ -439,8 +442,8 @@ const RangeChart: React.FC<{
           <span
             className={
               xbarR.rangesOutOfControlCount === 0
-                ? 'text-emerald-400 font-bold'
-                : 'text-rose-400 font-bold'
+                ? 'text-emerald-700 font-bold'
+                : 'text-rose-600 font-bold'
             }
           >
             {xbarR.rangesOutOfControlCount}
@@ -448,7 +451,7 @@ const RangeChart: React.FC<{
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-slate-950 rounded-lg p-2 border border-slate-800">
+      <div className="w-full overflow-x-auto bg-white rounded-lg p-2 border border-slate-200 shadow-2xs">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full min-w-[700px] h-auto font-sans"
@@ -459,16 +462,17 @@ const RangeChart: React.FC<{
             y1={scaleY(xbarR.uclR)}
             x2={width - padRight}
             y2={scaleY(xbarR.uclR)}
-            stroke="#f43f5e"
+            stroke="#e11d48"
             strokeDasharray="4 4"
             strokeWidth="1.5"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(xbarR.uclR) + 4}
-            fill="#f43f5e"
+            fill="#e11d48"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             UCL: {xbarR.uclR.toFixed(4)}
           </text>
@@ -479,15 +483,16 @@ const RangeChart: React.FC<{
             y1={scaleY(xbarR.overallMeanRange)}
             x2={width - padRight}
             y2={scaleY(xbarR.overallMeanRange)}
-            stroke="#38bdf8"
+            stroke="#0284c7"
             strokeWidth="1.5"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(xbarR.overallMeanRange) + 4}
-            fill="#38bdf8"
+            fill="#0284c7"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             R̄: {xbarR.overallMeanRange.toFixed(4)}
           </text>
@@ -498,19 +503,19 @@ const RangeChart: React.FC<{
             y1={padTop}
             x2={padLeft}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           {[0, 0.33, 0.66, 1].map((pct) => {
             const v = yMin + pct * (yMax - yMin);
             const y = scaleY(v);
             return (
               <g key={pct}>
-                <line x1={padLeft - 4} y1={y} x2={padLeft} y2={y} stroke="#475569" />
+                <line x1={padLeft - 4} y1={y} x2={padLeft} y2={y} stroke="#94a3b8" />
                 <text
                   x={padLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -526,7 +531,7 @@ const RangeChart: React.FC<{
             y1={height - padBottom}
             x2={width - padRight}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           {data.parts.map((p, idx) => {
             const x = scaleX(idx);
@@ -537,13 +542,13 @@ const RangeChart: React.FC<{
                   y1={height - padBottom}
                   x2={x}
                   y2={height - padBottom + 4}
-                  stroke="#475569"
+                  stroke="#94a3b8"
                 />
                 <text
                   x={x}
                   y={height - padBottom + 18}
                   textAnchor="middle"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -586,8 +591,8 @@ const RangeChart: React.FC<{
                       cx={x}
                       cy={y}
                       r={isOut ? 5 : 3}
-                      fill={isOut ? '#ef4444' : color}
-                      stroke="#0f172a"
+                      fill={isOut ? '#e11d48' : color}
+                      stroke="#ffffff"
                       strokeWidth="1.5"
                     />
                   );
@@ -611,46 +616,46 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
       contrib: xbarR.contribGRR,
       color:
         xbarR.pctGRR < 10
-          ? '#10b981'
+          ? '#059669'
           : xbarR.pctGRR <= 30
-          ? '#f59e0b'
-          : '#ef4444',
+          ? '#d97706'
+          : '#e11d48',
     },
     {
       name: '重複性 (EV / 設備)',
       pctStudy: xbarR.pctEV,
       pctTol: xbarR.pctTolEV,
       contrib: xbarR.contribEV,
-      color: '#38bdf8',
+      color: '#0284c7',
     },
     {
       name: '再現性 (AV / 人員)',
       pctStudy: xbarR.pctAV,
       pctTol: xbarR.pctTolAV,
       contrib: xbarR.contribAV,
-      color: '#a855f7',
+      color: '#7c3aed',
     },
     {
       name: '零件變異 (PV / 工件)',
       pctStudy: xbarR.pctPV,
       pctTol: xbarR.pctTolPV,
       contrib: xbarR.contribPV,
-      color: '#14b8a6',
+      color: '#0d9488',
     },
   ];
 
   return (
     <div className="space-y-4">
-      <div className="text-xs text-slate-400">
-        AIAG 評估核心標準：<span className="text-emerald-400 font-medium">&lt;10% 為合格</span>；
-        <span className="text-amber-400 font-medium">10%~30% 為條件接受</span>；
-        <span className="text-rose-400 font-medium">&gt;30% 為不可接受</span>。
+      <div className="text-xs text-slate-600">
+        AIAG 評估核心標準：<span className="text-emerald-700 font-semibold">&lt;10% 為合格</span>；
+        <span className="text-amber-700 font-semibold">10%~30% 為條件接受</span>；
+        <span className="text-rose-700 font-semibold">&gt;30% 為不可接受</span>。
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* % Study Variation 與 % Tolerance */}
-        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-4">
-          <div className="flex items-center justify-between text-xs font-medium text-slate-300">
+        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between text-xs font-semibold text-slate-800">
             <span>變異研究百分比 (% Study Var vs % Tol)</span>
             <span className="text-slate-500 font-mono">10% / 30% 臨界值</span>
           </div>
@@ -659,27 +664,27 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
             {items.map((it) => (
               <div key={it.name} className="space-y-1">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-300 font-medium">{it.name}</span>
+                  <span className="text-slate-800 font-medium">{it.name}</span>
                   <div className="flex items-center gap-3 font-mono text-[11px]">
-                    <span className="text-slate-400">
-                      %TV: <strong className="text-slate-200">{it.pctStudy.toFixed(1)}%</strong>
+                    <span className="text-slate-500">
+                      %TV: <strong className="text-slate-800">{it.pctStudy.toFixed(1)}%</strong>
                     </span>
-                    <span className="text-slate-400">
-                      %Tol: <strong className="text-slate-200">{it.pctTol.toFixed(1)}%</strong>
+                    <span className="text-slate-500">
+                      %Tol: <strong className="text-slate-800">{it.pctTol.toFixed(1)}%</strong>
                     </span>
                   </div>
                 </div>
 
-                <div className="relative h-4 bg-slate-900 rounded overflow-hidden">
+                <div className="relative h-4 bg-slate-100 rounded overflow-hidden">
                   {/* 10% 參考線 */}
                   <div
-                    className="absolute top-0 bottom-0 w-px bg-emerald-500/60 z-10"
+                    className="absolute top-0 bottom-0 w-px bg-emerald-600 z-10"
                     style={{ left: '10%' }}
                     title="10% 合格上限"
                   />
                   {/* 30% 參考線 */}
                   <div
-                    className="absolute top-0 bottom-0 w-px bg-rose-500/60 z-10"
+                    className="absolute top-0 bottom-0 w-px bg-rose-600 z-10"
                     style={{ left: '30%' }}
                     title="30% 警戒上限"
                   />
@@ -690,7 +695,7 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
                     style={{
                       width: `${Math.min(100, it.pctStudy)}%`,
                       backgroundColor: it.color,
-                      opacity: 0.85,
+                      opacity: 0.9,
                     }}
                   />
                 </div>
@@ -698,17 +703,17 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
             ))}
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-900 font-mono">
+          <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100 font-mono">
             <span>0%</span>
-            <span className="text-emerald-400">10% 合格</span>
-            <span className="text-rose-400">30% 警戒</span>
+            <span className="text-emerald-700 font-semibold">10% 合格</span>
+            <span className="text-rose-700 font-semibold">30% 警戒</span>
             <span>100%</span>
           </div>
         </div>
 
         {/* % Contribution (方差貢獻率) */}
-        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-4">
-          <div className="flex items-center justify-between text-xs font-medium text-slate-300">
+        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between text-xs font-semibold text-slate-800">
             <span>方差貢獻率 (% Contribution)</span>
             <span className="text-slate-500 font-mono">σ² 比率</span>
           </div>
@@ -717,18 +722,18 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
             {items.map((it) => (
               <div key={it.name} className="space-y-1">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-300">{it.name}</span>
-                  <span className="font-mono text-slate-200 text-[11px]">
+                  <span className="text-slate-800">{it.name}</span>
+                  <span className="font-mono text-slate-900 font-semibold text-[11px]">
                     {it.contrib.toFixed(2)}%
                   </span>
                 </div>
-                <div className="h-3 bg-slate-900 rounded overflow-hidden">
+                <div className="h-3 bg-slate-100 rounded overflow-hidden">
                   <div
                     className="h-full rounded transition-all"
                     style={{
                       width: `${Math.min(100, it.contrib)}%`,
                       backgroundColor: it.color,
-                      opacity: 0.8,
+                      opacity: 0.85,
                     }}
                   />
                 </div>
@@ -736,10 +741,10 @@ const ComponentsChart: React.FC<{ xbarR: XbarRResults }> = ({ xbarR }) => {
             ))}
           </div>
 
-          <div className="p-2.5 rounded bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400">
-            <span className="text-slate-300 font-medium">備註：</span>
+          <div className="p-2.5 rounded bg-slate-50 border border-slate-200 text-xs text-slate-600">
+            <span className="text-slate-800 font-semibold">備註：</span>
             %Contribution 是以變異方差（σ²）為基底計算，而 %Study Var 則以標準差（6σ）為基底。
-            AIAG 4th Edition 標準評定通常依據 <span className="text-sky-400 font-mono">%Study Var (%GRR)</span>。
+            AIAG 4th Edition 標準評定通常依據 <span className="text-sky-700 font-mono font-semibold">%Study Var (%GRR)</span>。
           </div>
         </div>
       </div>
@@ -788,18 +793,18 @@ const PartScatterChart: React.FC<{
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+      <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
         <div>
-          <span className="text-slate-200 font-medium">各工件實際量測值散佈圖 (By Part)</span>
-          <span className="mx-2 text-slate-600">|</span>
+          <span className="text-slate-900 font-semibold">各工件實際量測值散佈圖 (By Part)</span>
+          <span className="mx-2 text-slate-300">|</span>
           <span>呈現 10 件車削工件所有量測點的分佈範圍與零件均值趨勢</span>
         </div>
-        <div className="font-mono text-slate-400 text-xs">
+        <div className="font-mono text-slate-600 text-xs font-medium">
           公差規格: [{metadata.lsl.toFixed(3)}, {metadata.usl.toFixed(3)}] {metadata.unit}
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-slate-950 rounded-lg p-2 border border-slate-800">
+      <div className="w-full overflow-x-auto bg-white rounded-lg p-2 border border-slate-200 shadow-2xs">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full min-w-[700px] h-auto font-sans"
@@ -810,16 +815,17 @@ const PartScatterChart: React.FC<{
             y1={scaleY(metadata.usl)}
             x2={width - padRight}
             y2={scaleY(metadata.usl)}
-            stroke="#f43f5e"
+            stroke="#e11d48"
             strokeDasharray="3 3"
             strokeWidth="1"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(metadata.usl) + 4}
-            fill="#f43f5e"
+            fill="#e11d48"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             USL: {metadata.usl.toFixed(3)}
           </text>
@@ -830,16 +836,17 @@ const PartScatterChart: React.FC<{
             y1={scaleY(metadata.lsl)}
             x2={width - padRight}
             y2={scaleY(metadata.lsl)}
-            stroke="#f43f5e"
+            stroke="#e11d48"
             strokeDasharray="3 3"
             strokeWidth="1"
           />
           <text
             x={width - padRight + 6}
             y={scaleY(metadata.lsl) + 4}
-            fill="#f43f5e"
+            fill="#e11d48"
             fontSize="10"
             fontFamily="monospace"
+            fontWeight="bold"
           >
             LSL: {metadata.lsl.toFixed(3)}
           </text>
@@ -850,14 +857,14 @@ const PartScatterChart: React.FC<{
             y1={padTop}
             x2={padLeft}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           <line
             x1={padLeft}
             y1={height - padBottom}
             x2={width - padRight}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
 
           {/* 零件刻度 */}
@@ -870,13 +877,13 @@ const PartScatterChart: React.FC<{
                   y1={height - padBottom}
                   x2={x}
                   y2={height - padBottom + 4}
-                  stroke="#475569"
+                  stroke="#94a3b8"
                 />
                 <text
                   x={x}
                   y={height - padBottom + 18}
                   textAnchor="middle"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -893,14 +900,14 @@ const PartScatterChart: React.FC<{
               <polyline
                 points={meanPoints}
                 fill="none"
-                stroke="#64748b"
+                stroke="#94a3b8"
                 strokeWidth="1.5"
                 strokeDasharray="3 3"
               />
             );
           })()}
 
-          {/* 繪製各量測點 (以稍微橫向偏移區隔人員) */}
+          {/* 繪製各量測點 */}
           {data.operators.map((_, opIdx) => {
             const opOffset = (opIdx - (k - 1) / 2) * 5;
             const color = colors[opIdx % colors.length];
@@ -917,7 +924,7 @@ const PartScatterChart: React.FC<{
                       r="3"
                       fill={color}
                       fillOpacity="0.85"
-                      stroke="#0f172a"
+                      stroke="#ffffff"
                       strokeWidth="1"
                     />
                   ));
@@ -968,19 +975,19 @@ const InteractionChart: React.FC<{
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+      <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
         <div>
-          <span className="text-slate-200 font-medium">
+          <span className="text-slate-900 font-semibold">
             人員與工件交互作用圖 (Operator × Part Interaction)
           </span>
-          <span className="mx-2 text-slate-600">|</span>
+          <span className="mx-2 text-slate-300">|</span>
           <span>
             若各作業員連線趨於平行，代表無顯著交互作用；若線條大量交叉，代表某些作業員對特定形體工件有習慣性量測偏差。
           </span>
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-slate-950 rounded-lg p-2 border border-slate-800">
+      <div className="w-full overflow-x-auto bg-white rounded-lg p-2 border border-slate-200 shadow-2xs">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full min-w-[700px] h-auto font-sans"
@@ -991,14 +998,14 @@ const InteractionChart: React.FC<{
             y1={padTop}
             x2={padLeft}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
           <line
             x1={padLeft}
             y1={height - padBottom}
             x2={width - padRight}
             y2={height - padBottom}
-            stroke="#334155"
+            stroke="#cbd5e1"
           />
 
           {/* 零件刻度 */}
@@ -1011,13 +1018,13 @@ const InteractionChart: React.FC<{
                   y1={height - padBottom}
                   x2={x}
                   y2={height - padBottom + 4}
-                  stroke="#475569"
+                  stroke="#94a3b8"
                 />
                 <text
                   x={x}
                   y={height - padBottom + 18}
                   textAnchor="middle"
-                  fill="#94a3b8"
+                  fill="#64748b"
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -1054,7 +1061,7 @@ const InteractionChart: React.FC<{
                     cy={scaleY(xbarR.operatorPartMeans[opIdx][partIdx])}
                     r="3.5"
                     fill={color}
-                    stroke="#0f172a"
+                    stroke="#ffffff"
                     strokeWidth="1.5"
                   />
                 ))}
