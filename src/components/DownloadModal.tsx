@@ -131,11 +131,36 @@ npm run build
           </div>
         </div>
 
-        {/* 方法 3：免安裝！在現場電腦當獨立桌面軟體使用（PWA） */}
+        {/* 方法 3：GitHub Pages 與 GitHub Actions 自動部署 */}
+        <div className="bg-slate-950 p-4 rounded-xl border border-sky-500/30 space-y-2.5">
+          <div className="flex items-center gap-2 text-sky-400 text-xs font-bold uppercase tracking-wider">
+            <Globe className="w-4 h-4" />
+            方法三：發布至 GitHub Pages（已內建 GitHub Actions 自動部署）
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            系統已為您配置好 <code className="text-sky-300 font-mono">.github/workflows/deploy.yml</code> 與相對路徑 <code className="text-sky-300 font-mono">base: './'</code>，只需三步驟即可上線：
+          </p>
+          <ol className="list-decimal list-inside text-xs text-slate-400 space-y-1.5 pl-1">
+            <li>
+              將專案程式碼 Push 推送至您的 GitHub 倉庫（<code className="text-slate-200 font-mono">main</code> 或 <code className="text-slate-200 font-mono">master</code> 分支）。
+            </li>
+            <li>
+              至 GitHub 倉庫頁面點選 <strong className="text-slate-200">Settings</strong> $\rightarrow$ <strong className="text-slate-200">Pages</strong>。
+            </li>
+            <li>
+              在 <strong className="text-slate-200">Build and deployment</strong> 的 <strong className="text-slate-200">Source</strong> 下拉選單中，選擇 <strong className="text-emerald-400 font-semibold">GitHub Actions</strong>。
+            </li>
+            <li>
+              推送後 GitHub Actions 會自動執行編譯並發布，您即可透過專屬網址 <code className="text-sky-300 font-mono">https://&lt;帳號&gt;.github.io/&lt;倉庫名&gt;/</code> 正常瀏覽！
+            </li>
+          </ol>
+        </div>
+
+        {/* 方法 4：免安裝！在現場電腦當獨立桌面軟體使用（PWA） */}
         <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2.5">
           <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
             <Laptop className="w-4 h-4" />
-            方法三：免下載免安裝，直接當 Windows/Mac 桌面獨立視窗應用程式
+            方法四：免下載免安裝，直接當 Windows/Mac 桌面獨立視窗應用程式
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
             您也可以直接複製專屬分享連結，在車間檢驗室任一台電腦開啟：
