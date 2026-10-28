@@ -1,0 +1,6 @@
+{
+  "name": "車削加工 MSA 量測系統分析報告系統",
+  "description": "專為精密車削與CNC加工打造的量測系統分析 (MSA) 自動化評估與報告生成平台。支援 Gage R&R (Xbar-R / ANOVA)、偏倚分析、Excel批次匯入與AIAG標準報告導出。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
