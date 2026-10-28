@@ -4,8 +4,14 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
+  // 自動適配 GitHub Pages 倉庫路徑：
+  // 在 GitHub Actions 執行時，會自動帶入 GITHUB_REPOSITORY (例如 "tida760523/repo-name")
+  const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+  const isUserPage = repoName && repoName.toLowerCase().endsWith('.github.io');
+  const base = repoName ? (isUserPage ? '/' : `/${repoName}/`) : './';
+
   return {
-    base: './',
+    base,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

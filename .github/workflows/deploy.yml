@@ -38,7 +38,10 @@ jobs:
         run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
       - name: Build application
-        run: npm run build
+        run: |
+          npm run build
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
